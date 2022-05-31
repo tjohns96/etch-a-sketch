@@ -1,28 +1,51 @@
 const gridContainer = document.querySelector("#gridContainer");
 const body = document.querySelector("body");
 const clearButton = document.querySelector("button");
+const eraserButton = document.querySelector("input");
+const gridSlider = document.querySelector("#dimensionSlider");
+const value = document.querySelector("#value");
 let mousePressed = false;
+let eraser = false;
 dimension = 16;  // The grid will be size dimension x dimension
+function updateDimension() {
+    {
+        value.textContent = `${gridSlider.value} x ${gridSlider.value} grid`;
+        populateGrid(gridSlider.value);
+    }
+}
 function populateGrid(dimension) {
+    resetBoard();
     for (let i = 0; i < dimension; i++) {
         let tempDivRow = document.createElement("div"); // creating the div row that will hold dimension number of divs
         tempDivRow.setAttribute("class", "row")
-        tempDivRow.setAttribute("style", "display:flex; height: calc(100vh*10/160); width: 100vh");
+        tempDivRow.style.display = "flex";
+        tempDivRow.style.height = `calc(100vh/${dimension})`;
         gridContainer.appendChild(tempDivRow);
         for (let j = 0; j < dimension; j++) {
             let tempDivSquare = document.createElement("div");
             tempDivSquare.setAttribute("class", "square");
-            tempDivSquare.setAttribute("style", "width: calc(100vh*10/160)");
+            tempDivSquare.setAttribute("style", `width: calc(100vh/${dimension})`);
             tempDivSquare.addEventListener("mouseover", function (e) {
-                if (mousePressed === true) {
+                if (eraser && mousePressed === true) {
+                    e.target.style.backgroundColor = "white";
+                }
+                else if (mousePressed === true) {
                     e.target.style.backgroundColor = "black";
                 }
             })
             tempDivSquare.addEventListener("mousedown", function (e) {
-                e.target.style.backgroundColor = "black";
+                if (eraser) {
+                    e.target.style.backgroundColor = "white";
+                }
+                else {
+                    e.target.style.backgroundColor = "black";
+                }
             })
             tempDivSquare.addEventListener("dragover", function (e) {
-                if (mousePressed === true) {
+                if (eraser) {
+                    e.target.style.backgroundColor = "white";
+                }
+                else if (mousePressed === true) {
                     e.target.style.backgroundColor = "black";
                 }
             })
@@ -30,13 +53,22 @@ function populateGrid(dimension) {
         }
     }
 }
+function resetBoard() {
+    let rows = document.querySelectorAll(".row");
+    rows.forEach((row) => {
+        row.remove();
+    });
+}
 
-clearButton.addEventListener("click", ()=>{
+clearButton.addEventListener("click", () => {
     let squares = document.querySelectorAll(".square");
-    squares.forEach((square)=>{
+    squares.forEach((square) => {
         square.style.backgroundColor = "white";
     });
 });
+eraserButton.addEventListener("click", () => {
+    eraser = !eraser;
+})
 body.addEventListener("mousedown", () => {
     mousePressed = true;
     console.log("working");
@@ -50,5 +82,6 @@ body.addEventListener("dragend", () => {
 body.addEventListener("dragstart", () => {
     mousePressed = true;
 });
-
+gridSlider.addEventListener("input", updateDimension);
 populateGrid(dimension);
+updateDimension();

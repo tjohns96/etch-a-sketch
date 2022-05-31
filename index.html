@@ -14,8 +14,18 @@
     <div id="gridContainer"></div>
     <div id="pageFunctions">
         <h1>Etch-A-Sketch!</h1>
-        <button>Erase</button>
+        <div id="eraserToggle">
+            <span>Toggle eraser</span>
+            <input type="checkbox">
+        </div>
+        <button>Clear</button>
+        <div id="gridSize">
+            <span>Select how large you want the grid to be: </span>
+            <input type="range" min="1" max="100" value="16" class="slider" id="dimensionSlider">
+            <span id="value"></span>
+        </div>
     </div>
+
 </body>
 
 </html>
