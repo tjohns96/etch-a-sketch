@@ -4,6 +4,7 @@ const clearButton = document.querySelector("button");
 const eraserButton = document.querySelector("input");
 const gridSlider = document.querySelector("#dimensionSlider");
 const value = document.querySelector("#value");
+const colorWheel = document.querySelector("#colorWheel");
 let mousePressed = false;
 let eraser = false;
 dimension = 16;  // The grid will be size dimension x dimension
@@ -30,7 +31,7 @@ function populateGrid(dimension) {
                     e.target.style.backgroundColor = "white";
                 }
                 else if (mousePressed === true) {
-                    e.target.style.backgroundColor = "black";
+                    e.target.style.backgroundColor = `${colorWheel.value}`;
                 }
             })
             tempDivSquare.addEventListener("mousedown", function (e) {
@@ -38,7 +39,7 @@ function populateGrid(dimension) {
                     e.target.style.backgroundColor = "white";
                 }
                 else {
-                    e.target.style.backgroundColor = "black";
+                    e.target.style.backgroundColor = `${colorWheel.value}`;
                 }
             })
             tempDivSquare.addEventListener("dragover", function (e) {
@@ -46,7 +47,7 @@ function populateGrid(dimension) {
                     e.target.style.backgroundColor = "white";
                 }
                 else if (mousePressed === true) {
-                    e.target.style.backgroundColor = "black";
+                    e.target.style.backgroundColor = `${colorWheel.value}`;
                 }
             })
             tempDivRow.appendChild(tempDivSquare);
