@@ -1,4 +1,4 @@
-const gridContainer = document.querySelector("#gridContainer");
+    const gridContainer = document.querySelector("#gridContainer");
 const body = document.querySelector("body");
 const clearButton = document.querySelector("button");
 const eraserButton = document.querySelector("input");
@@ -25,7 +25,7 @@ function populateGrid(dimension) {
         for (let j = 0; j < dimension; j++) {
             let tempDivSquare = document.createElement("div");
             tempDivSquare.setAttribute("class", "square");
-            tempDivSquare.setAttribute("style", `width: calc(100vh/${dimension})`);
+            tempDivSquare.setAttribute("style", `width: calc(100vh/${dimension}); border: solid black 1px`);
             tempDivSquare.addEventListener("mouseover", function (e) {
                 if (eraser && mousePressed === true) {
                     e.target.style.backgroundColor = "white";
