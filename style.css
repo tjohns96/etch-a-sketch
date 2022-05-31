@@ -1,0 +1,24 @@
+#gridContainer{
+    display: flex;
+    flex-direction: column;
+    flex: 0;
+    height: 100vh;
+    width: calc(100vh + 6px);
+    box-sizing: border-box;
+    border: solid blue;
+}
+body{
+    margin: 0px;
+    box-sizing: border-box;
+    max-width: 100vw;
+    max-height: 100vh;
+    padding-left: 10vh;
+    display: flex;
+}
+
+#pageFunctions{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
